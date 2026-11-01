@@ -1,4 +1,11 @@
-import sys, glob, importlib, logging, asyncio, os
+import asyncio
+# FIX for Render Python 3.12+ : No current event loop error
+try:
+    asyncio.get_event_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
+import sys, glob, importlib, logging, os
 from pathlib import Path
 import pytz
 from datetime import date, datetime
