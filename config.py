@@ -4,32 +4,37 @@ from os import environ
 from Script import script
 
 id_pattern = re.compile(r'^-?\d+$')
+
 def is_enabled(value, default):
-    if not value: return default
-    if value.lower() in ["true", "yes", "1", "enable", "y"]:
+    if not value: 
+        return default
+    value = value.lower()
+    if value in ["true", "yes", "1", "enable", "y"]:
         return True
-    elif value.lower() in ["false", "no", "0", "disable", "n"]:
+    elif value in ["false", "no", "0", "disable", "n"]:
         return False
     else:
         return default
       
 # Bot Information
-API_ID = int(environ.get("API_ID", "0"))
-API_HASH = environ.get("API_HASH", "")
-BOT_TOKEN = environ.get("BOT_TOKEN", "")
+API_ID = int(environ.get("API_ID", "31840117"))
+API_HASH = environ.get("API_HASH", "89f1686ada0890abcfa567b211b70d1d")
+BOT_TOKEN = environ.get("BOT_TOKEN", "9287123932:AAFa0Pch_5cmntLp8EP-pFdNSpeIPM43arI")
 
 PICS = (environ.get('PICS', 'https://graph.org/file/ce1723991756e48c35aa1.jpg')).split()
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '').split() if admin]
 BOT_USERNAME = environ.get("BOT_USERNAME", "Movietime17_bot")
-PORT = environ.get("PORT", "8080")
+
+# FIXED: PORT must be int for Render
+PORT = int(environ.get("PORT", "8080"))
 
 # Clone Info :-
 CLONE_MODE = is_enabled(environ.get('CLONE_MODE', "False"), False)
-CLONE_DB_URI = environ.get("CLONE_DB_URI", "")
+CLONE_DB_URI = environ.get("CLONE_DB_URI", "mongodb+srv://Indranilp:indranil@cluster0.cbftbsc.mongodb.net/")
 CDB_NAME = environ.get("CDB_NAME", "clonetechvj")
 
 # Database Information
-DB_URI = environ.get("DB_URI", "")
+DB_URI = environ.get("DB_URI", "mongodb+srv://Indranilp:indranil@cluster0.cbftbsc.mongodb.net/")
 DB_NAME = environ.get("DB_NAME", "techvjbotz")
 
 # Auto Delete Information
@@ -47,7 +52,7 @@ BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
 PUBLIC_FILE_STORE = is_enabled(environ.get('PUBLIC_FILE_STORE', "False"), False)
 
 # Verify Info :-
-VERIFY_MODE = is_enabled(environ.get('VERIFY_MODE', "True"), True)
+VERIFY_MODE = is_enabled(environ.get('VERIFY_MODE', "False"), False) # Default False korlam, jate verify jhamela na kore
 SHORTLINK_URL = environ.get("SHORTLINK_URL", "arolinks.com")
 SHORTLINK_API = environ.get("SHORTLINK_API", "25a1724f14b2699312d596a7d2e7a9adf8cf865f")
 VERIFY_TUTORIAL = environ.get("VERIFY_TUTORIAL", "https://t.me/backup_movietime/6")
